@@ -1,4 +1,8 @@
-
+<?php
+  session_start();
+ 
+  
+?>
 
 <html>
   <head>
@@ -48,6 +52,15 @@
                 ?>
                 <div class="text-danger">
                     Usuário ou senha inválido(s)
+                </div>
+
+                <? } ?>
+                <?
+                  if(isset($_GET['login']) && $_GET['login'] == 'erro2'){
+                    echo($_GET['login'])
+                ?>
+                <div class="text-danger">
+                   Você não tem acesso a essa pagina
                 </div>
 
                 <? } ?>
