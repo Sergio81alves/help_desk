@@ -1,3 +1,7 @@
+<?php require_once "validador_acesso.php"?>
+<!--escolhendo o require_once pq é de suma importancía que hája um fatal erro ou que venha 100% se ela não puder ser realizada a aplicação ñ vai poder ser acessado
+(once pq a autenticação será so uma vez) 
+-->
 <html>
   <head>
     <meta charset="utf-8" />
@@ -21,6 +25,12 @@
         <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
         App Help Desk
       </a>
+
+      <ul class="navbar-nav">
+        <li class="navbar-item">
+          <a href="logoff.php">SAIR</a>
+        </li>
+      </ul>
     </nav>
 
     <div class="container">    
@@ -54,7 +64,7 @@
 
               <div class="row mt-5">
                 <div class="col-6">
-                  <button class="btn btn-lg btn-warning btn-block" type="submit">Voltar</button>
+                  <a href="abrir_chamado.php" class="btn btn-lg btn-warning btn-block" type="submit">Voltar</a>
                 </div>
               </div>
             </div>
