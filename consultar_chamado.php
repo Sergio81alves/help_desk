@@ -2,6 +2,19 @@
 <!--escolhendo o require_once pq é de suma importancía que hája um fatal erro ou que venha 100% se ela não puder ser realizada a aplicação ñ vai poder ser acessado
 (once pq a autenticação será so uma vez) 
 -->
+<?php 
+  $chamados = [];
+
+  $arquivo = fopen('arquivo.hd', 'r');
+  while(!feof($arquivo)){
+    $registro = fgets($arquivo);
+    $chamados[] = $registro;
+
+  }
+
+  fclose($arquivo);
+
+?>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -45,21 +58,28 @@
             <div class="card-body">
               
               <div class="card mb-3 bg-light">
+              <?php
+                foreach($chamados as $chamado){ 
+                  $chamado_dado = explode('#', $chamado);
+
+                    if($_SESSION['perfil_id'] == 2){
+                      
+                      if($_SESSION['id'] != $chamado_dado[0]){
+                        continue;
+                      }
+                    }
+
+                  if(count($chamado_dado) < 3){
+                    continue;
+                  } ?>
+
                 <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
+                  <h5 class="card-title"><?= $chamado_dado[1] ?></h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><?= $chamado_dado[2] ?></h6>
+                  <p class="card-text"><?= $chamado_dado[3] ?></p>
                 </div>
-              </div>
-
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
-                </div>
+                
+              <?php } ?>
               </div>
 
               <div class="row mt-5">

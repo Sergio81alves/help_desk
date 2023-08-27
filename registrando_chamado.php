@@ -1,26 +1,33 @@
 <?php
-    echo "<pre>";
+   session_start();
+
+   
+   echo "<pre>";
     print_r($_POST);
-    echo "</pre>";
+   echo "</pre>";
 
-    $arquivo = fopen('arquivo.hd', 'a');//pesquisar more about fopen() e seus parametros, o q ele é capaz 
+   $titulo =str_replace('#', '-', $_POST['titulo']);
+   $categoria = str_replace('#', '-',$_POST['categoria']) ;
+   $descricao = str_replace('#', '-',$_POST['descricao']);
 
-   $titulo = str_replace('#', '-', $_POST['titulo']);
-    $categoria = str_replace('#', '-', $_POST['categoria']);
-    $descricao = str_replace('#', '-', $_POST['descricao']);
+   $texto = $_SESSION['id']. '#'. $titulo. ' # '. $categoria. ' # '. $descricao;
 
-    $texto = $titulo. ' # '. $categoria. ' # '. $descricao. PHP_EOL;
+   $arquivo = fopen('arquivo.hd', 'a');
+    //pesquisar more about fopen() e seus parametros, o q ele é capaz 
+
+   
+
 
     /* $texto = preg_replace('/#/', '-', implode($_POST));*/
     
-   echo $texto ;
-
+    fwrite($arquivo, $texto .PHP_EOL);
+    //fwrite() o primeiro parametro como string
    //para escrever meus arquivos no hd
    //recebe dois parametros um é o que quero escrever e o outro é na onde quero fazer isso
-   fwrite($arquivo, $texto);
+   fclose($arquivo);
    // depois de abrir eu preciso sempre fechar
    //recebe um parametro que é onde está o fopen()
-   fclose($arquivo);
-
-   header('location: abrir_chamado.php');
+   
+/**A sequuencia é importante primeiro abrir um arquivo fopen() depois colocar ele como variavel e passar ele para o fwrite() que vai escrever no arquivo depois eu preciso fechar fclose() */
+   header('location: abrir_chamado.php')
 ?>
